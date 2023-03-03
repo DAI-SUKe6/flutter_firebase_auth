@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/screens/login_screen.dart';
 import 'package:flutter_firebase_auth/services/auth_service.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,8 +12,6 @@ void main() async {
   );
   runApp(const MyApp());
 }
-
-AuthService _service = AuthService();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -41,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  AuthService _service = AuthService();
 
   void _incrementCounter() {
     setState(() {
@@ -63,17 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             DrawerHeader(
-                decoration: const BoxDecoration(color: Colors.blue),
+                decoration: const BoxDecoration(color: Colors.indigo),
                 child: Text("Hello User $displayEmail")),
             ListTile(
               title: const Text("Logout"),
               onTap: () {
-                //call logout()
-                _service.logout();
-                //redirect to login page
-                Navigator.pop(context);
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                _service.logout(currentUser);
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    (route) => false);
               },
             )
           ],

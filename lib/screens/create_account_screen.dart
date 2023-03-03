@@ -9,6 +9,7 @@ class CreateAccountScreen extends StatelessWidget {
   TextEditingController _passwordController = TextEditingController();
 
   AuthService _service = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

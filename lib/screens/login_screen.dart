@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/main.dart';
 import 'package:flutter_firebase_auth/screens/create_account_screen.dart';
+import 'package:flutter_firebase_auth/services/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  AuthService _service = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class LoginScreen extends StatelessWidget {
         title: const Text("Login to app"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(100.0),
+        padding: const EdgeInsets.all(28.0),
         child: Column(
           children: [
             TextField(
@@ -33,22 +36,31 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-                //call service.login
-                //check result and open new screen
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MyHomePage(title: "My App")));
+                onPressed: () async {
+                  bool res = await _service.login(
+                      _emailController.text, _passwordController.text);
+                  if (res) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text("Logged in")));
+
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                MyHomePage(title: 'Home Page')));
+                  }
                 },
                 child: const Text("Login")),
             const SizedBox(
               height: 20,
             ),
             GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CreateAccountScreen()));
-                },
-                child: const Text("No account? create new >>"))
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CreateAccountScreen()));
+              },
+              child: const Text("No Account? Create New >>"),
+            )
           ],
         ),
       ),

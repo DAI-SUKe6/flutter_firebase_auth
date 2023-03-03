@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '571138204622',
     projectId: 'mobile-lab-flutter-firebase',
     storageBucket: 'mobile-lab-flutter-firebase.appspot.com',
-    iosClientId: '571138204622-b90ijufsis629nom81t2naug38t1dpb3.apps.googleusercontent.com',
+    iosClientId:
+        '571138204622-b90ijufsis629nom81t2naug38t1dpb3.apps.googleusercontent.com',
     iosBundleId: 'com.example.firebaseAuthen',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '571138204622',
     projectId: 'mobile-lab-flutter-firebase',
     storageBucket: 'mobile-lab-flutter-firebase.appspot.com',
-    iosClientId: '571138204622-b90ijufsis629nom81t2naug38t1dpb3.apps.googleusercontent.com',
+    iosClientId:
+        '571138204622-b90ijufsis629nom81t2naug38t1dpb3.apps.googleusercontent.com',
     iosBundleId: 'com.example.firebaseAuthen',
   );
 }

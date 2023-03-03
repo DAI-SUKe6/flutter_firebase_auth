@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class AuthService {
   User? _user;
@@ -22,7 +23,7 @@ class AuthService {
     return false;
   }
 
-  Future<bool> login({required String email, required String password}) async {
+  Future<bool> login(String email, String password) async {
     try {
       UserCredential user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -34,7 +35,7 @@ class AuthService {
     return false;
   }
 
-  Future<void> logout() async {
+  Future<void> logout(User? currentUser) async {
     await FirebaseAuth.instance.signOut();
   }
 }
